@@ -1,10 +1,10 @@
 #define MAGIC_WORDS       "ccstreamdeck" // first words that are send so the pc knows that this is the stream deck
 
 #define BAUD_RATE         9600  // baud rate for serial communication
-#define NUM_BUTTONS       2     // number of physical buttons connected 
+#define NUM_BUTTONS       15     // number of physical buttons connected 
 #define BUTTON_START_PIN  2     // first pin of first button, second button needs to be connected to BUTTON_START_PIN+1, etc.
 #define GREEN_LED_PIN     18    // IO pin of green led
-#define RED_LED_PIN       13    // IO pin of red led
+#define RED_LED_PIN       19    // IO pin of red led
 
 #define BUTTON_TRIGGER_COOLDOWN 100 // (ms) how long until trigger event can be sent again
 
@@ -49,11 +49,18 @@ void setup() {
   
 }
 
+void check_time_overflow()
+{
+  if(millis() < LAST_BUTTON_TRIGGER_TIME) // millis flowed over
+    LAST_BUTTON_TRIGGER_TIME = 0;
+}
+
 void loop() {
   if(CONNECTED){
     for(byte i = 0; i < NUM_BUTTONS; i++){
       int btn_state_before = BUTTON_STATES[i];
       BUTTON_STATES[i] = digitalRead(BUTTON_START_PIN+i);
+      check_time_overflow();
       if(btn_state_before == 0 && BUTTON_STATES[i] == 1 && (millis()-LAST_BUTTON_TRIGGER_TIME) > BUTTON_TRIGGER_COOLDOWN){
         Serial.write(&i, 1);
         LAST_BUTTON_TRIGGER_TIME = millis();
@@ -62,6 +69,7 @@ void loop() {
     delay(1);
   }
   else{
+    // send signal - not connected
     digitalWrite(RED_LED_PIN, HIGH);
     delay(500);
     digitalWrite(RED_LED_PIN, LOW);
