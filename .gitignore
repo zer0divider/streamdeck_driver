@@ -1,0 +1,10 @@
+*.sln
+Debug/
+*.swp
+*.vim
+*.vcxproj
+*.filters
+*.user
+streamdeck_driver/Debug
+streamdeck_driver/Release
+.vs/
