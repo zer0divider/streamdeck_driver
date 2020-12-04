@@ -8,3 +8,8 @@ Debug/
 streamdeck_driver/Debug
 streamdeck_driver/Release
 .vs/
+*.obj
+*.log
+*.pdb
+*.iobj
+*.ipdb
