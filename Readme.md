@@ -5,20 +5,22 @@ This is the windows driver for our home-made streamdeck.
 Prebuilt binary in folder `Release`.
 
 ## Configuration
-* when you run the `streamdeck_driver.exe` a new configuration file: `C:\Users\<user>\streamdeck_config.txt` is created
+* when starting the driver the configuration is read from `C:\Users\<user>\streamdeck_config.txt`
+* if the configuration file does not exist a default is created
 * the config file describes the button mapping to hotkey sequences
-* Mapping button `X` to hotkey:
+* each button is assigned to a group, buttons of the same group can not be triggered simultaneously (mutual exclusion)
+* assign button `X` to group `Y` and map to hotkey:
 ```
-X: [C=CTRL][A=ALT][S=SHIFT](a-z | 0-9)
+X@Y: [C=CTRL][A=ALT][S=SHIFT](a-z | 0-9)
 ```
-* Example, maps button 2 to hotkey CTRL+SHIFT+B:
+* Example, maps button 2 (group 1) to hotkey CTRL+SHIFT+B:
 ```
-02: CSb
+02@01: CSb
 ```
 * Use `$X` to delay the following hotkey by `X` milliseconds
-* Example, map button 10 to sequence: trigger CTRL+A, wait for 1500 milliseconds, trigger CTRL+B:
+* Example, map button 10 (group 10) to sequence: trigger CTRL+A, wait for 1500 milliseconds, trigger CTRL+B:
 ```
-10: Ca $1500 Cb
+10@10: Ca $1500 Cb
 ```
 
 ## Build (Windows only!)
