@@ -13,3 +13,4 @@ streamdeck_driver/Release
 *.pdb
 *.iobj
 *.ipdb
+*.aps

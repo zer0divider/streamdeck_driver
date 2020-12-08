@@ -27,7 +27,7 @@ int BUTTON_PINS[NUM_BUTTONS] = {
   15,// button 12
   16,// button 13
   17,// button 14
-  18, // button 15
+  18,// button 15
   19 // button 16
 };
 
