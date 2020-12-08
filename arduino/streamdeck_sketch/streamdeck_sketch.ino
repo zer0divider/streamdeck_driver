@@ -1,7 +1,7 @@
 #define MAGIC_WORDS       "ccstreamdeck" // first words that are send so the pc knows that this is the stream deck
 
 #define BAUD_RATE         9600  // baud rate for serial communication
-#define NUM_BUTTONS       15     // number of physical buttons connected 
+#define NUM_BUTTONS       16     // number of physical buttons connected 
 #define GREEN_LED_PIN     12    // IO pin of green led
 #define RED_LED_PIN       13    // IO pin of red led
 
@@ -27,7 +27,8 @@ int BUTTON_PINS[NUM_BUTTONS] = {
   15,// button 12
   16,// button 13
   17,// button 14
-  18 // button 15
+  18, // button 15
+  19 // button 16
 };
 
 // array keeping track of button states (1: pressed, 0: released)
